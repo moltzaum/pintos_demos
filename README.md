@@ -12,6 +12,9 @@ Most of the files in the `hash_key_demo` folder are from the pintos kernel libra
 
 `keyed_hash` is a file that only follows the api for the main pintos hash. It uses casting magic and simplifies the pintos hash api.
 
+The main pintos hash api also takes advantage of the pintos linked list. I think the linked list is cool because it is done without any
+dynamic allocation! That's not what this demo is about though..
+
 #### Stack Demo
 
 This was my first introduction to both memcpy and writing macros. The `PUSH` and `POP` macros are designed to work with data of any size.
