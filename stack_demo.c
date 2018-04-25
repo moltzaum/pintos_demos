@@ -133,7 +133,7 @@ int main () {
     
   #endif
   
-      /* Dumps everything I want to know about the stack into the console. */
+    /* Dumps everything I want to know about the stack into the console. */
   #ifdef PRINT_DUMP
     str = NULL;
     uint64_t diff = (uint64_t) top - (uint64_t) max_esp;
