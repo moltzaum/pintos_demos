@@ -23,6 +23,18 @@ void init_thread (struct thread **t, char* name) {
 	(*t)->tid = get_tid();
 }
 
+struct page {
+    void* uaddr;
+    struct hash_elem elem_h;
+    char* data;
+};
+
+void init_page (struct page **p, char* name) {
+    *p = malloc (sizeof (struct page));
+    (*p)->uaddr = name;
+    (*p)->data = name;
+}
+
 /*	
 	This is a quick demo with a spoof thread struct. The important thing to know
 	about the thread struct is that it should look like this:
@@ -40,43 +52,28 @@ void init_thread (struct thread **t, char* name) {
 
 int main() {
 	
-	/*
-	//List demo
-	struct list l;
-	list_init (&l);
-	
-	struct thread *t;
-	init_thread (&t, "Matthew");
-	list_push_back (&l, &t->elem_l);
-	
-	init_thread (&t, "Michael");
-	list_push_back (&l, &t->elem_l);
-	
-	//Iterate list
-	struct list_elem *e;
-	for (e = list_begin (&l); e != list_end (&l); e = list_next (e)) {
-		struct thread *te = list_entry (e, struct thread, elem_l);
-		printf ("%s %d\n", te->name, te->tid);
-	} */
-	
 	//Hash demo
 	struct hash h;
 	init_keyed_hash (h);
 	
-	struct thread *t;
-	init_thread (&t, "Annie");
-	hash_insert (&h, &t->elem_h);
+	char* a = "Annie";
+	char* b = "Brian";
+	char* c = "Charlie";
 	
-	init_thread (&t, "Brian");
-	hash_insert (&h, &t->elem_h);
+	struct page *p;
+	init_page (&p, a);
+	hash_insert (&h, &p->elem_h);
 	
-	init_thread (&t, "Charlie");
-	hash_insert (&h, &t->elem_h);
+	init_page (&p, b);
+	hash_insert (&h, &p->elem_h);
+	
+	init_page (&p, c);
+	hash_insert (&h, &p->elem_h);
 	
 	//Pull out one item from list using key
-	struct hash_elem *e = hash_lookup_key (&h, 1);
-	t = hash_entry (e, struct thread, elem_h);
+	struct hash_elem *e = hash_lookup_key (&h, (int) a);
+	p = hash_entry (e, struct page, elem_h);
 	
-	printf ("%s has a tid of %d\n", t->name, t->tid);
+	printf ("%s has a key of %p\n", p->data, p->uaddr);
 	
 }
