@@ -56,6 +56,25 @@ int main() {
 	struct hash h;
 	init_keyed_hash (h);
 	
+	/*
+	struct thread *t;
+  	init_thread (&t, "Annie");
+  	hash_insert (&h, &t->elem_h);
+  	
+  	init_thread (&t, "Brian");
+  	hash_insert (&h, &t->elem_h);
+  	
+  	init_thread (&t, "Charlie");
+  	hash_insert (&h, &t->elem_h);
+  	
+  	//Pull out one item from list using key
+  	struct hash_elem *e = hash_lookup_key (&h, 1);
+  	t = hash_entry (e, struct thread, elem_h);
+  	
+  	printf ("%s has a tid of %d\n", t->name, t->tid);
+	*/
+	
+	//*
 	char* a = "Annie";
 	char* b = "Brian";
 	char* c = "Charlie";
@@ -75,5 +94,6 @@ int main() {
 	p = hash_entry (e, struct page, elem_h);
 	
 	printf ("%s has a key of %p\n", p->data, p->uaddr);
+	//*/
 	
 }

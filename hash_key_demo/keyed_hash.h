@@ -2,6 +2,7 @@
 #define __LIB_KERNEL_KEYED_HASH_H
 
 #include "hash.h"
+#include <stdio.h>
 
 /* Everything in here is pretty lightweight, so method are made inline. */
 
@@ -18,9 +19,9 @@ struct hash_key {
  * (hash keys are castable to their raw value, and objects are
  * castable to their keys) */
 static inline unsigned
-hash_key_func (const void *a) {
-	int *key = (int*) a;
-	return hash_int (*key);
+hash_key_func (const struct hash_elem *e) {
+	struct hash_key *k = hash_entry (e, struct hash_key, elem);
+	return hash_int (k->key);
 }
 
 /* Standard less than function that operates on keys. */
